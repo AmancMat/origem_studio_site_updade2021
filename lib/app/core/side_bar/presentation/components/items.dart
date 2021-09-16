@@ -27,7 +27,7 @@ Widget items(BuildContext context) {
                 onTap: () {
                   bloc.changeIndex(i);
                 },
-                child: item(router.listPages[i].title,
+                child: item(router.listPages[i].title!,
                     iconColor, lineColor, letraColor, backgroundColor, context),
               );
             });

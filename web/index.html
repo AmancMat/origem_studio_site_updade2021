@@ -1,36 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
+    <!--
+      If you are serving your web app in a path other than the root, change the
+      href value below to reflect the base path you are serving from.
+      The path provided below has to start and end with a slash "/" in order for
+      it to work correctly.
+      For more details:
+      * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+    -->
+    <base href="/">
 
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
+    <meta charset="UTF-8">
+    <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+    <meta name="description" content="Usamos a tecnologia para transformar sua vida!">
 
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-  -->
-  <base href="/">
+    <!-- iOS meta tags & icons -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Origem Studio">
+    <link rel="apple-touch-icon" href="icons/favicon.png">
 
-  <meta charset="UTF-8">
-  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A new Flutter project.">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/png" href="favicon.png"/>
 
-  <!-- iOS meta tags & icons -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="origem_studio_site_updade2021">
-  <link rel="apple-touch-icon" href="icons/Icon-192.png">
-
-  <title>origem_studio_site_updade2021</title>
-  <link rel="manifest" href="manifest.json">
+    <title>Origem Studio</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel=”icon” href=”favicon.ico”>
 </head>
 <body>
-  <!-- This script installs service_worker.js to provide PWA functionality to
-       application. For more information, see:
-       https://developers.google.com/web/fundamentals/primers/service-workers -->
-  <script>
+<!-- This script installs service_worker.js to provide PWA functionality to
+     application. For more information, see:
+     https://developers.google.com/web/fundamentals/primers/service-workers -->
+<script>
     var serviceWorkerVersion = null;
     var scriptLoaded = false;
     function loadMainDartJs() {
@@ -93,6 +95,67 @@
       // Service workers not supported. Just drop the <script> tag.
       loadMainDartJs();
     }
-  </script>
+
+</script>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="/__/firebase/8.7.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="/__/firebase/8.7.0/firebase-analytics.js"></script>
+
+<!-- Initialize Firebase -->
+<script>
+  var firebaseConfig = {
+    apiKey: "AIzaSyA3ZKmK_ZQhyjOEALOsCfPYBA35Fu7cujQ",
+    authDomain: "origem-studio-test.firebaseapp.com",
+    projectId: "origem-studio-test",
+    storageBucket: "origem-studio-test.appspot.com",
+    messagingSenderId: "143637153830",
+    appId: "1:143637153830:web:66dbb5df0fac59b087fee7",
+    measurementId: "G-6XZNYFZ7G4"
+};
+
+firebase.initializeApp(firebaseConfig);
+</script>
+<script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const loadEl = document.querySelector('#load');
+        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+        // // The Firebase SDK is initialized and available here!
+        //
+        // firebase.auth().onAuthStateChanged(user => { });
+        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
+        // firebase.firestore().doc('/foo/bar').get().then(() => { });
+        // firebase.functions().httpsCallable('yourFunction')().then(() => { });
+        // firebase.messaging().requestPermission().then(() => { });
+        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
+        // firebase.analytics(); // call to activate
+        // firebase.analytics().logEvent('tutorial_completed');
+        // firebase.performance(); // call to activate
+        //
+        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+
+        try {
+          let app = firebase.app();
+          let features = [
+            'auth',
+            'database',
+            'firestore',
+            'functions',
+            'messaging',
+            'storage',
+            'analytics',
+            'remoteConfig',
+            'performance',
+          ].filter(feature => typeof app[feature] === 'function');
+          loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
+        } catch (e) {
+          console.error(e);
+          loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
+        }
+      });
+    </script>
+<script src="/__/firebase/init.js"></script>
 </body>
 </html>

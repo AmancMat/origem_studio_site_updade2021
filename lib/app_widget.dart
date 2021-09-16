@@ -22,7 +22,7 @@ class _AppWidgetState extends State<AppWidget> {
           return Builder(
             builder: (context) {
               return MaterialApp(
-                title: 'Core',
+                title: 'Origem Studio',
                 theme: isDark ? buildDarkTheme() : buildLightTheme(),
                 debugShowCheckedModeBanner: false,
                 navigatorKey: AppRouter.instance.navigationKey,

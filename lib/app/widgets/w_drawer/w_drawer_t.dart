@@ -27,43 +27,64 @@ class WDrawerT extends StatelessWidget {
               ),
               Container(
                 height: 800,
-                width: 300,
-                color: darkgray,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                width: 400,
+                color: blackGray,
+                child: Row(
                   children: [
-                    Container(
-                      height: 60,
-                      width: .2,
-                      color: minimumgray,
-                      margin: EdgeInsets.only(
-                          left: 100
-                      ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          height: 60,
+                          width: .2,
+                          color: minimumGray,
+                          margin: EdgeInsets.only(
+                              left: 100
+                          ),
+                        ),
+                        WOrigem(),
+                        Container(
+                          height: 60,
+                          width: .2,
+                          color: minimumGray,
+                          margin: EdgeInsets.only(
+                              top: 10,
+                              left: 100
+                          ),
+                        ),
+                        Container(
+                          height: 150,
+                          width: 200,
+                          child: ListView.builder(
+                              itemCount: pages.length,
+                              itemBuilder: (_, i) => Padding(
+                                padding: EdgeInsets.only(
+                                    top: 10
+                                ),
+                                child: ButtomDrawer(
+                                  page: pages[i], index: i,
+                                ),
+                              )),
+                        ),
+                        Container(
+                          height: 450,
+                          width: .2,
+                          color: minimumGray,
+                          margin: EdgeInsets.only(
+                              left: 100
+                          ),
+                        ),
+                      ],
                     ),
-                    WOrigem(),
                     Container(
-                      height: 60,
-                      width: .2,
-                      color: minimumgray,
-                      margin: EdgeInsets.only(
-                          top: 10,
-                          left: 100
-                      ),
+                        height: 103,
+                        width: 103,
+                        margin: EdgeInsets.only(
+                            top: 670,
+                            left: 43
+                        ),
+                        child: Image.asset('assets/image/d01.jpg')
                     ),
-                    Container(
-                      height: 150,
-                      width: 200,
-                      child: ListView.builder(
-                          itemCount: pages.length,
-                          itemBuilder: (_, i) => Padding(
-                            padding: EdgeInsets.only(
-                                top: 10
-                            ),
-                            child: ButtomDrawer(
-                              page: pages[i], index: i,
-                            ),
-                          )),
-                    )
                   ],
                 ),
               ),

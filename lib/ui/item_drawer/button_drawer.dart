@@ -6,7 +6,8 @@ import 'package:origem_studio_site_updade2021/app/theme/theme.dart';
 import 'package:origem_studio_site_updade2021/app_router.dart';
 
 class ButtomDrawer extends StatelessWidget {
-  const ButtomDrawer({Key? key, required this.page, required this.index}) : super(key: key);
+  const ButtomDrawer({Key? key, required this.page, required this.index})
+      : super(key: key);
 
   final PageModel page;
   final int index;
@@ -18,9 +19,7 @@ class ButtomDrawer extends StatelessWidget {
       children: [
         Container(
           width: 150,
-          margin: EdgeInsets.only(
-              left: 50
-          ),
+          margin: EdgeInsets.only(left: 50),
           child: Align(
             alignment: Alignment.centerLeft,
             child: TextButton(
@@ -29,18 +28,15 @@ class ButtomDrawer extends StatelessWidget {
                   AppRouter.instance.pop();
                 },
                 child: Padding(
-                  padding:  EdgeInsets.only(
-                      left: 30
-                  ),
-                  child: Text(page.title,
-                    style: TextStyle(
-                        color: nanogray
-                    ),
+                  padding: EdgeInsets.only(left: 30),
+                  child: Text(
+                    page.title!,
+                    style: TextStyle(color: nanoGray),
                   ),
                 )),
           ),
         ),
-        if(page.hasSub!)
+        if (page.hasSub!)
           Container(
             child: Icon(Icons.add),
           )

@@ -1,11 +1,11 @@
 {
-    "name": "origem_studio_site_updade2021",
-    "short_name": "origem_studio_site_updade2021",
+    "name": "Origem Studio",
+    "short_name": "Origem Studio",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "Usamos a tecnologia para transformar sua vida!",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

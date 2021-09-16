@@ -19,56 +19,70 @@ class WDrawerM extends StatelessWidget {
           minWidth: 100,
         ),
         child: Align(
-          alignment: Alignment.centerLeft,
-          child: Column(
-            children: [
-              SizedBox(
-                height: 50,
-              ),
-              Container(
-                height: 800,
-                width: 300,
-                color: darkgray,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      height: 60,
-                      width: .2,
-                      color: minimumgray,
-                      margin: EdgeInsets.only(
-                          left: 100
-                      ),
-                    ),
-                    WOrigem(),
-                    Container(
-                      height: 60,
-                      width: .2,
-                      color: minimumgray,
-                      margin: EdgeInsets.only(
-                          top: 10,
-                          left: 100
-                      ),
-                    ),
-                    Container(
-                      height: 150,
-                      width: 200,
-                      child: ListView.builder(
-                          itemCount: pages.length,
-                          itemBuilder: (_, i) => Padding(
-                            padding: EdgeInsets.only(
-                                top: 10
-                            ),
-                            child: ButtomDrawer(
-                              page: pages[i], index: i,
-                            ),
-                          )),
-                    )
-                  ],
+          alignment: Alignment.topLeft,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 30,
                 ),
-              ),
-            ],
-          ),
+                Container(
+                  height: 550,
+                  width: 355,
+                  color: blackGray,
+                  child: Row(
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            height: 120,
+                            width: .2,
+                            color: minimumGray,
+                            margin: EdgeInsets.only(
+                                top: 10,
+                                left: 100
+                            ),
+                          ),
+                          Container(
+                            height: 250,
+                            width: 200,
+                            child: ListView.builder(
+                                itemCount: pages.length,
+                                itemBuilder: (_, i) => Padding(
+                                  padding: EdgeInsets.only(
+                                      top: 10
+                                  ),
+                                  child: ButtomDrawer(
+                                    page: pages[i], index: i,
+                                  ),
+                                )),
+                          ),
+                          Container(
+                            height: 30,
+                            width: .2,
+                            color: minimumGray,
+                            margin: EdgeInsets.only(
+                                top: 10,
+                                left: 100
+                            ),
+                          ),
+                        ],
+                      ),
+                      Container(
+                          height: 60,
+                          width: 60,
+                          margin: EdgeInsets.only(
+                            top: 390,
+                          ),
+                          child: Image.asset('assets/image/d01.jpg')
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          )
         ),
       ),
     );

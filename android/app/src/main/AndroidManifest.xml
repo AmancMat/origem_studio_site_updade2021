@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.origemstudio.origem_studio_site_updade2021">
    <application
-        android:label="origem_studio_site_updade2021"
+        android:label="Origem Studio"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

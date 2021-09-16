@@ -1,4 +1,3 @@
-import 'package:animated_icon_button/animated_icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -8,6 +7,7 @@ import 'package:origem_studio_site_updade2021/app/widgets/w_drawer/w_drawer_d.da
 import 'package:origem_studio_site_updade2021/app/widgets/w_drawer/w_drawer_m.dart';
 import 'package:origem_studio_site_updade2021/app/widgets/w_drawer/w_drawer_t.dart';
 import 'package:origem_studio_site_updade2021/app_router.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class WSideBar extends StatefulWidget {
   const WSideBar({Key? key}) : super(key: key);
@@ -16,25 +16,8 @@ class WSideBar extends StatefulWidget {
   _WSideBarState createState() => _WSideBarState();
 }
 
-class _WSideBarState extends State<WSideBar>
-    with SingleTickerProviderStateMixin {
+class _WSideBarState extends State<WSideBar> {
   final appRoutes = AppRouter();
-
-  late AnimationController _animationController;
-  bool isPlaying = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _animationController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 450));
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _animationController.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,51 +27,134 @@ class _WSideBarState extends State<WSideBar>
       if (constrains.maxWidth < 900) {
         ///Mobile
         return Container(
-            height: 70,
+            height: 50,
             width: w,
-            color: darkgray,
+            decoration: BoxDecoration(
+              color: darkGray,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.5),
+                  spreadRadius: 5,
+                  blurRadius: 7,
+                  offset: Offset(0, 3), // changes position of shadow
+                ),
+              ],
+            ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
-                  height: 50,
-                  width: 70,
-                  child: Center(
-                    child: SvgPicture.asset(
-                      'assets/image/cube.svg',
-                      color: Colors.white,
-                      fit: BoxFit.scaleDown,
-                    ),
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: Container(
-                    height: 70,
-                    width: 70,
-                    color: orange,
-                    child: AnimatedIconButton(
-                      icons: const <AnimatedIconItem>[
-                        AnimatedIconItem(
-                          icon: Icon(FontAwesomeIcons.alignLeft),
+                Row(
+                  children: [
+                    Container(
+                      height: 40,
+                      width: 40,
+                      margin: EdgeInsets.only(
+                        left: 25,
+                        right: 3
+                      ),
+                      child: Center(
+                        child: SvgPicture.asset(
+                          'assets/image/cub.svg',
+                          fit: BoxFit.contain,
+                          color: Colors.white,
                         ),
-                        AnimatedIconItem(
-                            icon: Icon(
-                          FontAwesomeIcons.chevronLeft,
-                          color: Color(0xfff68338),
-                        )),
-                      ],
-                      onPressed: () => _handleOnPressed(
-                        showDialog(
-                            barrierColor: Colors.transparent,
-                            barrierDismissible: true,
-                            context: context,
-                            builder: (context) => WDrawerM(
-                              pages: appRoutes.listPages,
-                            )),
-                      )
+                      ),
                     ),
-                  ),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text('Origem Studio',
+                        textScaleFactor: 1.1,
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontFamily: 'neuropol',
+                          color: minimumGray,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Container(
+                          height: 35,
+                          width: 30,
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                  color: nanoGray,
+                                  width: .5
+                              )
+                          ),
+                          child: IconButton(
+                            onPressed: _faceBookURL,
+                            icon: FaIcon(FontAwesomeIcons.facebookF),
+                            color: nanoGray,
+                            iconSize: 15,
+                          ),
+                        ),
+                        Container(
+                          height: 35,
+                          width: 30,
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                  color: nanoGray,
+                                  width: .5
+                              )
+                          ),
+                          child: IconButton(
+                            onPressed: _instaURL,
+                            icon: FaIcon(FontAwesomeIcons.instagramSquare),
+                            color: nanoGray,
+                            iconSize: 15,
+                          ),
+                        ),
+                        Container(
+                          height: 35,
+                          width: 30,
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                  color: nanoGray,
+                                  width: .5
+                              )
+                          ),
+                          child: IconButton(
+                            onPressed: _twitterURL,
+                            icon: FaIcon(FontAwesomeIcons.twitter),
+                            color: nanoGray,
+                            iconSize: 15,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: Container(
+                        height: 50,
+                        width: 50,
+                        color: softGray,
+                        margin: EdgeInsets.only(
+                          left: 15
+                        ),
+                        child: IconButton(
+                            onPressed: () {
+                              showDialog(
+                                  barrierColor: Colors.transparent,
+                                  barrierDismissible: true,
+                                  context: context,
+                                  builder: (context) => WDrawerM(
+                                    pages: appRoutes.listPages,
+                                  ));
+                            },
+                            icon: Icon(Icons.menu_outlined,
+                              color: orange,
+                              size: 30,
+                            ),
+                        )
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ));
@@ -98,41 +164,52 @@ class _WSideBarState extends State<WSideBar>
         return Container(
           height: h,
           width: 70,
-          color: darkgray,
+          decoration: BoxDecoration(
+            color: darkGray,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.5),
+                spreadRadius: 5,
+                blurRadius: 7,
+                offset: Offset(0, 3), // changes position of shadow
+              ),
+            ],
+          ),
           child: ListView(
             children: [
               Container(
                 height: 50,
                 width: 50,
-                margin: EdgeInsets.only(top: h * 0.13),
-                child: SvgPicture.asset(
-                  'assets/image/cube.svg',
-                  color: Colors.white,
+                margin: EdgeInsets.only(top: h * 0.13,
+                ),
+                child: Center(
+                  child: SvgPicture.asset(
+                    'assets/image/cub.svg',
+                    color: Colors.white,
+                  ),
                 ),
               ),
               Padding(
                 padding: EdgeInsets.only(top: 70),
-                child: AnimatedIconButton(
-                  icons: const <AnimatedIconItem>[
-                    AnimatedIconItem(
-                      icon: Icon(FontAwesomeIcons.alignLeft),
+                child: Container(
+                  height: 50,
+                  width: 50,
+                  child: IconButton(
+                    onPressed: () {
+                      showDialog(
+                          barrierColor: Colors.transparent,
+                          barrierDismissible: true,
+                          context: context,
+                          builder: (context) => WDrawerT(
+                            pages: appRoutes.listPages,
+                          ));
+                    },
+                    icon: Icon(Icons.menu_outlined,
+                      color: orange,
+                      size: 40,
                     ),
-                    AnimatedIconItem(
-                        icon: Icon(
-                      FontAwesomeIcons.chevronLeft,
-                      color: Color(0xfff68338),
-                    )),
-                  ],
-                  onPressed: () => _handleOnPressed(
-                    showDialog(
-                        barrierColor: Colors.transparent,
-                        barrierDismissible: true,
-                        context: context,
-                        builder: (context) => WDrawerT(
-                          pages: appRoutes.listPages,
-                        )),
-                  )
-                ),
+                  ),
+                )
               ),
               Container(
                   height: 15,
@@ -140,22 +217,104 @@ class _WSideBarState extends State<WSideBar>
                   child: Center(
                     child: Text(
                       'Menu',
-                      style: TextStyle(color: nanogray, fontSize: 13),
+                      style: TextStyle(color: nanoGray, fontSize: 13),
                     ),
                   )),
-              Container(
-                height: 07,
-                width: 40,
-                margin: EdgeInsets.only(
-                  top: 350,
-                ),
-                color: orange,
-              ),
-              WButtonBarSocialNetwork(),
-              Container(
-                height: 70,
-                width: 70,
-                color: orange,
+              Column(
+                children: [
+                  Container(
+                    height: 07,
+                    width: 40,
+                    margin: EdgeInsets.only(
+                      top: 350,
+                    ),
+                    color: orange,
+                  ),
+                  WButtonBarSocialNetwork(),
+                  Container(
+                      height: 70,
+                      width: 70,
+                      color: softGray,
+                      padding: EdgeInsets.all(9.5),
+                      child: GridView.count(
+                        crossAxisCount: 3,
+                        children: [
+                          Container(
+                            height: 0.05,
+                            width: 0.05,
+                            margin: EdgeInsets.all(5.5),
+                            child: CircleAvatar(
+                              backgroundColor: orange,
+                            ),
+                          ),
+                          Container(
+                            height: 0.05,
+                            width: 0.05,
+                            margin: EdgeInsets.all(5.5),
+                            child: CircleAvatar(
+                              backgroundColor: orange,
+                            ),
+                          ),
+                          Container(
+                            height: 0.05,
+                            width: 0.05,
+                            margin: EdgeInsets.all(5.5),
+                            child: CircleAvatar(
+                              backgroundColor: orange,
+                            ),
+                          ),
+                          Container(
+                            height: 0.05,
+                            width: 0.05,
+                            margin: EdgeInsets.all(5.5),
+                            child: CircleAvatar(
+                              backgroundColor: orange,
+                            ),
+                          ),
+                          Container(
+                            height: 0.05,
+                            width: 0.05,
+                            margin: EdgeInsets.all(5.5),
+                            child: CircleAvatar(
+                              backgroundColor: orange,
+                            ),
+                          ),
+                          Container(
+                            height: 0.05,
+                            width: 0.05,
+                            margin: EdgeInsets.all(5.5),
+                            child: CircleAvatar(
+                              backgroundColor: orange,
+                            ),
+                          ),
+                          Container(
+                            height: 0.05,
+                            width: 0.05,
+                            margin: EdgeInsets.all(5.5),
+                            child: CircleAvatar(
+                              backgroundColor: orange,
+                            ),
+                          ),
+                          Container(
+                            height: 0.05,
+                            width: 0.05,
+                            margin: EdgeInsets.all(5.5),
+                            child: CircleAvatar(
+                              backgroundColor: orange,
+                            ),
+                          ),
+                          Container(
+                            height: 0.05,
+                            width: 0.05,
+                            margin: EdgeInsets.all(5.5),
+                            child: CircleAvatar(
+                              backgroundColor: orange,
+                            ),
+                          ),
+                        ],
+                      )
+                  ),
+                ],
               ),
             ],
           ),
@@ -167,36 +326,50 @@ class _WSideBarState extends State<WSideBar>
             Container(
               height: h,
               width: 70,
-              color: darkgray,
+              decoration: BoxDecoration(
+                color: darkGray,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.5),
+                    spreadRadius: 5,
+                    blurRadius: 7,
+                    offset: Offset(0, 3), // changes position of shadow
+                  ),
+                ],
+              ),
               child: ListView(
                 children: [
                   Container(
                     height: 50,
                     width: 50,
-                    margin: EdgeInsets.only(top: h * 0.13),
+                    margin: EdgeInsets.only(top: h * 0.13,
+                    ),
                     child: SvgPicture.asset(
-                      'assets/image/cube.svg',
+                      'assets/image/cub.svg',
                       color: Colors.white,
                     ),
                   ),
                   Padding(
                     padding: EdgeInsets.only(top: 70),
-                    child: IconButton(
-                      iconSize: 45,
-                      icon: AnimatedIcon(
-                        icon: AnimatedIcons.menu_close,
-                        progress: _animationController,
+                    child: Container(
+                      height: 50,
+                      width: 50,
+                      child: IconButton(
+                        onPressed: () {
+                          showDialog(
+                              barrierColor: Colors.transparent,
+                              barrierDismissible: true,
+                              context: context,
+                              builder: (context) => WDrawerD(
+                                pages: appRoutes.listPages,
+                              ));
+                        },
+                        icon: Icon(Icons.menu_rounded,
+                          color: orange,
+                          size: 40,
+                        ),
                       ),
-                      onPressed: () => _handleOnPressed(
-                        showDialog(
-                            barrierColor: Colors.transparent,
-                            barrierDismissible: true,
-                            context: context,
-                            builder: (context) => WDrawerD(
-                              pages: appRoutes.listPages,
-                            )),
-                      )
-                    ),
+                    )
                   ),
                   Container(
                       height: 15,
@@ -204,7 +377,10 @@ class _WSideBarState extends State<WSideBar>
                       child: Center(
                         child: Text(
                           'Menu',
-                          style: TextStyle(color: nanogray, fontSize: 13),
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: nanoGray,
+                              fontSize: 13),
                         ),
                       )),
                   Container(
@@ -219,7 +395,85 @@ class _WSideBarState extends State<WSideBar>
                   Container(
                     height: 70,
                     width: 70,
-                    color: orange,
+                    color: softGray,
+                      padding: EdgeInsets.all(9.5),
+                    child: GridView.count(
+                      crossAxisCount: 3,
+                      children: [
+                        Container(
+                          height: 0.05,
+                          width: 0.05,
+                          margin: EdgeInsets.all(5.5),
+                          child: CircleAvatar(
+                            backgroundColor: orange,
+                          ),
+                        ),
+                        Container(
+                          height: 0.05,
+                          width: 0.05,
+                          margin: EdgeInsets.all(5.5),
+                          child: CircleAvatar(
+                            backgroundColor: orange,
+                          ),
+                        ),
+                        Container(
+                          height: 0.05,
+                          width: 0.05,
+                          margin: EdgeInsets.all(5.5),
+                          child: CircleAvatar(
+                            backgroundColor: orange,
+                          ),
+                        ),
+                        Container(
+                          height: 0.05,
+                          width: 0.05,
+                          margin: EdgeInsets.all(5.5),
+                          child: CircleAvatar(
+                            backgroundColor: orange,
+                          ),
+                        ),
+                        Container(
+                          height: 0.05,
+                          width: 0.05,
+                          margin: EdgeInsets.all(5.5),
+                          child: CircleAvatar(
+                            backgroundColor: orange,
+                          ),
+                        ),
+                        Container(
+                          height: 0.05,
+                          width: 0.05,
+                          margin: EdgeInsets.all(5.5),
+                          child: CircleAvatar(
+                            backgroundColor: orange,
+                          ),
+                        ),
+                        Container(
+                          height: 0.05,
+                          width: 0.05,
+                          margin: EdgeInsets.all(5.5),
+                          child: CircleAvatar(
+                            backgroundColor: orange,
+                          ),
+                        ),
+                        Container(
+                          height: 0.05,
+                          width: 0.05,
+                          margin: EdgeInsets.all(5.5),
+                          child: CircleAvatar(
+                            backgroundColor: orange,
+                          ),
+                        ),
+                        Container(
+                          height: 0.05,
+                          width: 0.05,
+                          margin: EdgeInsets.all(5.5),
+                          child: CircleAvatar(
+                            backgroundColor: orange,
+                          ),
+                        ),
+                      ],
+                    )
                   ),
                 ],
               ),
@@ -229,13 +483,31 @@ class _WSideBarState extends State<WSideBar>
       }
     });
   }
+}
 
-  void _handleOnPressed(Future<dynamic> showDialog) {
-    setState(() {
-      isPlaying = !isPlaying;
-      isPlaying
-          ? _animationController.forward()
-          : _animationController.reverse();
-    });
+_faceBookURL() async {
+  const url = 'https://www.facebook.com/origem.studio';
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
+  }
+}
+
+_instaURL() async {
+  const url = 'https://www.instagram.com/origem.studio/';
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
+  }
+}
+
+_twitterURL() async {
+  const url = 'https://twitter.com/StudioOrigem';
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
   }
 }

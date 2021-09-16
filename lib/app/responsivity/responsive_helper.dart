@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 
 class ResponsiveHelper extends StatefulWidget {
 
-  final Widget mobile;
-  final Widget tablet;
   final Widget desktop;
+  final Widget tablet;
+  final Widget mobile;
 
   const ResponsiveHelper({
     Key? key,
-    required this.mobile,
+    required this.desktop,
     required this.tablet,
-    required this.desktop}) : super(key: key);
+    required this.mobile,}) : super(key: key);
 
   @override
   State<ResponsiveHelper> createState() => _ResponsiveHelperState();
